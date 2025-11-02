@@ -1,14 +1,18 @@
-# (You should still have the 'book' variable, but let's retrieve it again to be safe)
->>> book = Book.objects.get(title="Nineteen Eighty-Four")
+Command to delete the book
 
-# Delete it
->>> result = book.delete()
+from bookshelf.models import Book
 
-# See the result of the deletion
+book = Book.objects.get(title="Nineteen Eighty-Four")
+result = book.delete()
+
+Expected Output:
+
 >>> print(result)
+
 (1, {'bookshelf.Book': 1})
 
-# Verify the database is empty
 >>> all_books = Book.objects.all()
+
 >>> print(all_books)
+
 <QuerySet []>

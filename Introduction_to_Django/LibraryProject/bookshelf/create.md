@@ -1,9 +1,11 @@
-# Create the book in memory
->>> book = Book(title="1984", author="George Orwell", publication_year=1949)
+Command to create a new Book instance
 
-# Save it to the database
->>> book.save()
+from bookshelf.models import Book
 
-# You can check it (optional)
->>> print(book)
+book = Book.objects.create(title="1984", author="George Orwell", publication_year=1949)
+
+Expected Output:
+
+>>> book
+
 <Book: 1984>

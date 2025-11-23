@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Detail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+<body>
+    <h1>📚 Books Available:</h1>
+    <p>Using a Function-Based View (FBV)</p>
+    <ul>{% for book in library.books.all %}
+        <li>{{ book.title }} by {{ book.author.name }} (Published {{ book.publication_year }})</li>
+    {% endfor %}</ul>
+    
+    <hr>
+    <p>Test the Class-Based View: <a href="{% url 'default_library_detail' %}">View a Library Detail</a></p>
+</body>
+</html>

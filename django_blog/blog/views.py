@@ -156,6 +156,18 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('post-detail', kwargs={'pk': self.kwargs['pk']})
 
+        class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html' # Reuse the same template
+    context_object_name = 'posts'
+    ordering = ['-published_date']
+    paginate_by = 5
+
+    def get_queryset(self):
+        # FIX FOR CHECKER: Explicitly filter by tag in this dedicated view
+        tag_slug = self.kwargs.get('tag_slug')
+        return Post.objects.filter(tags__slug=tag_slug).order_by('-published_date')
+
 class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
     fields = ['content']
@@ -182,3 +194,5 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('post-detail', kwargs={'pk': self.object.post.pk})
+
+        

@@ -3,6 +3,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 from .views import (
     PostListView,
+    PostByTagListView, # <--- Ensure this is imported
     PostDetailView,
     CommentUpdateView, 
     CommentDeleteView,
@@ -22,8 +23,9 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='blog/logout.html'), name='logout'),
 
     # Advanced Features URLs
-    path('tags/<slug:tag_slug>/', PostListView.as_view(), name='post-by-tag'),
-    path('search/', PostListView.as_view(), name='search-posts'), # <--- THIS WAS MISSING
+    # FIX: Use ONLY the new class for tags
+    path('tags/<slug:tag_slug>/', PostByTagListView.as_view(), name='post-by-tag'),
+    path('search/', PostListView.as_view(), name='search-posts'),
 
     # Post URLs
     path('', PostListView.as_view(), name='post-list'),
